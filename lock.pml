@@ -1,5 +1,5 @@
 #define MAX_THREADS 5
-#define THREADS 2
+#define THREADS 3
 
 #define islocked(x) (locked[x])
 

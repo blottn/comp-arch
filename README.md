@@ -6,25 +6,25 @@ Found in english.md
 
 ## Verification
 
-### To verify:
+### Contents
 - [Safety](#Safety)
 - [Deadlock free](#Deadlock)
 - [Starvation free](#Starvation)
 - [liveness](#Liveness)
 
-#### Safety
+### Safety
 
 Safety
 
-#### Deadlock
+### Deadlock
 
 Deadlock
 
-#### Starvation
+### Starvation
 
 Starvation
 
-#### Liveness
+### Liveness
 
 Liveness
 

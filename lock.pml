@@ -1,9 +1,9 @@
 #define MAX_THREADS 5
-#define THREADS 3
+#define THREADS 2
 
 #define islocked(x) (locked[x])
 
-#define lock (islocked[0])
+#define lock (islocked(0))
 #define nolock (!lock)
 
 bool choosing[MAX_THREADS];
@@ -15,7 +15,7 @@ bool locked[MAX_THREADS];
 int numcrit = 0;
 
 ltl safe {[](numcrit < 2)};
-
+ltl deadfree {[]((!locked[0]) -> (<> ( locked[0] ) ) )}
 
 active [THREADS] proctype agent(){
 

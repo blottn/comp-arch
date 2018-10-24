@@ -7,10 +7,10 @@ Found in english.md
 ## Verification
 
 ### To verify:
-- [Safety] (#Safety)
-- [Deadlock free] (#Deadlock)
-- [Starvation free] (#Starvation)
-- [liveness] (#Liveness)
+- [Safety](#Safety)
+- [Deadlock free](#Deadlock)
+- [Starvation free](#Starvation)
+- [liveness](#Liveness)
 
 #### Safety
 

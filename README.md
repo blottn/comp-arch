@@ -14,26 +14,26 @@ Found in english.md
 
 ### Safety
 
-Safety
+Proven by asserting no more than 1 thread is in the critical section at a time.
 
 ### Deadlock
 
-Deadlock
+Any system that is starvation free is deadlock free
 
 ### Starvation
 
-Starvation
+Proven by asserting the following ltl:
+```promella
+ltl starvefree {[]( (wanting[0]) -> (<> ( locked[0] ) ) )};
+```
+This says that if a thread wants the lock it will eventually have the lock
 
 ### Liveness
 
-Liveness
+Liveness is proven by proving the system is starvation free.
 
 
 
 
-
-
-
-
-
+#### Citation for definitions of liveness and deadlock/starvation:
 https://en.wikipedia.org/wiki/Liveness

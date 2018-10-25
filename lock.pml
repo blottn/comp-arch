@@ -14,8 +14,8 @@ bool wanting[MAX_THREADS];
 
 int numcrit = 0;
 
-ltl safe {[](numcrit < 2)};
-ltl deadfree {[]( (wanting[0]) -> (<> ( locked[0] ) ) )};
+ltl safe {[](numcrit <= 1)};
+ltl starvefree {[]( (wanting[0]) -> (<> ( locked[0] ) ) )};
 
 active [THREADS] proctype agent(){
 
@@ -46,7 +46,7 @@ retry:
 
     atomic {
         numcrit++;
-        locked[_pid] = 1;   /* have lock */
+        locked[_pid] = 1;
         wanting[_pid] = 0;
     }
 

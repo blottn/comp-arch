@@ -10,20 +10,22 @@ bool choosing[MAX_THREADS];
 int number[MAX_THREADS];
 
 bool locked[MAX_THREADS];
-
+bool wanting[MAX_THREADS];
 
 int numcrit = 0;
 
 ltl safe {[](numcrit < 2)};
-ltl deadfree {[]((!locked[0]) -> (<> ( locked[0] ) ) )}
+ltl deadfree {[]( (wanting[0]) -> (<> ( locked[0] ) ) )};
 
 active [THREADS] proctype agent(){
 
     int i;
     int j;
     int max;
-
+    int iter = 0;
 retry:
+    wanting[_pid] = 1;
+    iter = iter + 1;
 
     choosing[_pid] = 1;
     max = 0;
@@ -42,16 +44,25 @@ retry:
         (!((number[j] != 0) && ((number[j] < number[_pid]) || ((number[j] == number[_pid]) && (j < _pid)))))
     }
 
-    numcrit++;
+    atomic {
+        numcrit++;
+        locked[_pid] = 1;   /* have lock */
+        wanting[_pid] = 0;
+    }
 
-    locked[_pid] = 1;   /* have lock */
+    atomic {
+        locked[_pid] = 0;
+        numcrit--;
+    }
 
-    locked[_pid] = 0;
+//release:
 
-    numcrit--;
-
-release:
     number[_pid] = 0;
 
-    goto retry;
+    if
+    ::  (iter == 3) -> goto end;
+    ::  else -> goto retry;
+    fi
+end:
+
 }
